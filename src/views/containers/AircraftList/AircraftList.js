@@ -7,6 +7,7 @@ function AircraftList () {
     const [data, setData] = useState([]);
     const [hasError, setError] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    
     const fetchAircraft = async () => {
         setLoading(true);
         setError(false);
@@ -30,9 +31,10 @@ function AircraftList () {
             {isLoading && <div>Loading...</div>}
             {!isLoading && !hasError && 
                 <ul>
-                    {data.map((el, index) => (
+                    {data.length > 0 && data.map((el, index) => (
                         <Aircraft key={index} {...el} />
                     ))}
+                    {data.length === 0 && <li>There are no aircraft to display</li>}
                 </ul>
             }
             {hasError && <div>There has been an error</div>}
