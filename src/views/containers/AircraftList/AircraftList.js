@@ -27,17 +27,17 @@ function AircraftList () {
     }, []);
 
     return (
-        <div>
-            {isLoading && <div>Loading...</div>}
+        <div data-testid="aircraft-list-container">
+            {isLoading && <div data-testid="loading">Loading...</div>}
             {!isLoading && !hasError && 
-                <ul>
+                <ul data-testid="aircraft-list">
                     {data.length > 0 && data.map((el, index) => (
                         <Aircraft key={index} {...el} />
                     ))}
-                    {data.length === 0 && <li>There are no aircraft to display</li>}
+                    {data.length === 0 && <li data-testid="aircraft-msg">There are no aircraft to display</li>}
                 </ul>
             }
-            {hasError && <div>There has been an error</div>}
+            {hasError && <div data-testid="error">There has been an error</div>}
         </div>
     );
 

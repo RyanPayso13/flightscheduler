@@ -26,7 +26,7 @@ function App() {
       <AppBar position="relative">
         <Toolbar>
           <Flight className={classes.icon} />
-          <h2>Flight Scheduler</h2>
+          <h2>Flight Scheduler App</h2>
         </Toolbar>
       </AppBar>
       <div className="App">

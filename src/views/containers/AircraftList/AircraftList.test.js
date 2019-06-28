@@ -1,27 +1,85 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {
+    render,
+    waitForElement
+} from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import { FetchMock } from '@react-mock/fetch';
 import AircraftList from './AircraftList';
 
-Enzyme.configure({ adapter: new Adapter() });
+describe('<AircraftList />', () => {
 
-function setup() {
-    const enzymeWrapper = shallow(<AircraftList />)
-    return {
-        enzymeWrapper
-    };
-}
-
-describe('Aircraft Component', () => {
+    const API_URL = 'https://infinite-dawn-93085.herokuapp.com/aircrafts';
 
     it('should render self', () => {
-        const { enzymeWrapper } = setup()
-        const aircraftInfo = enzymeWrapper.find('p');
+        const { getByTestId } = render(<AircraftList />);
+        expect(getByTestId('aircraft-list-container')).toBeInTheDocument();
+    });
 
-        expect(aircraftInfo.length).toEqual(3);
-        expect(aircraftInfo.at(0).text()).toEqual('GABCD');
-        expect(aircraftInfo.at(1).text()).toEqual('A320');
-        expect(aircraftInfo.at(2).text()).toEqual('EGKK');
-      });
+    it('should render loading state', () => {
+        const { getByTestId } = render(<AircraftList />);
+        const loadingEl = getByTestId('loading');
+        expect(loadingEl).toBeInTheDocument();
+        expect(loadingEl).toHaveTextContent('Loading...');
+    });
+
+    it('should render error state', async () => {
+        const { getByTestId } = render(
+            <FetchMock options={{ 
+                matcher: API_URL,
+                response: Promise.reject('API error')
+                }}>
+                <AircraftList />
+            </FetchMock>
+          );
+        const errorEl = await waitForElement(() => getByTestId('error'));
+        expect(errorEl).toBeInTheDocument();
+        expect(errorEl).toHaveTextContent('There has been an error');
+    });
+
+    it('should render one aircraft', async () => {
+        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}]};
+        const { getByTestId } = render(
+            <FetchMock options={{ 
+                matcher: API_URL,
+                response: data
+                }}>
+                <AircraftList />
+            </FetchMock>
+          );
+        const listEl = await waitForElement(() => getByTestId('aircraft-list-container'));
+        expect(listEl).toBeInTheDocument();
+        expect(listEl).toContainElement(getByTestId('ident'));
+    });
+
+    it('should render multiple aircraft', async () => {
+        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}, {"ident":"FOOBAR","type":"A320","economySeats":99,"base":"LOND"}]};
+        const { getByTestId } = render(
+            <FetchMock options={{ 
+                matcher: API_URL,
+                response: data
+                }}>
+                <AircraftList />
+            </FetchMock>
+          );
+        const listEl = await waitForElement(() => getByTestId('aircraft-list-container'));
+        expect(listEl).toBeInTheDocument();
+        expect(document.querySelectorAll('[data-testid="ident"]').length).toEqual(2);
+    });
+
+    it('should render no aircraft message', async () => {
+        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[]};
+        const { getByTestId } = render(
+            <FetchMock options={{ 
+                matcher: API_URL,
+                response: data
+                }}>
+                <AircraftList />
+            </FetchMock>
+          );
+        const aicraftMsgEl = await waitForElement(() => getByTestId('aircraft-msg'));
+        expect(aicraftMsgEl).toBeInTheDocument();
+        expect(aicraftMsgEl).toHaveTextContent('There are no aircraft to display');
+    });
 
 });

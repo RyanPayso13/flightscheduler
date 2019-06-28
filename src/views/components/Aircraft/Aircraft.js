@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const Aircraft = ({ident, type, base}) => (
     <li>
-        <p>{ident}</p>
-        <p>{type}</p>
-        <p>{base}</p>
+        <p data-testid="ident">{ident}</p>
+        <p data-testid="type">{type}</p>
+        <p data-testid="base">{base}</p>
     </li>
 );
 
