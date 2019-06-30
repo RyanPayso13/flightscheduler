@@ -19,7 +19,7 @@ function generateMock (resp = null) {
             </FetchMock>;
 }
 
-describe('<AircraftList />', () => {
+xdescribe('<AircraftList />', () => {
 
     const API_URL = 'https://infinite-dawn-93085.herokuapp.com/aircrafts';
 

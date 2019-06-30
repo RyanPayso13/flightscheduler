@@ -13,7 +13,7 @@ function generateContextTree(state = {}) {
       );
 }
 
-fdescribe('<CurrentAircraft />', () => {
+describe('<CurrentAircraft />', () => {
 
     it('should render the initial state', () => {
         const state = {
@@ -21,7 +21,7 @@ fdescribe('<CurrentAircraft />', () => {
         };
         const tree = generateContextTree(state);
         const { getByText } = render(tree);
-        expect(getByText('Current Aircraft:')).toHaveTextContent('Current Aircraft:');
+        expect(getByText(/^Current Aircraft:/)).toHaveTextContent('Current Aircraft:');
     });
 
     it('should render an aircraft id', () => {
@@ -30,7 +30,7 @@ fdescribe('<CurrentAircraft />', () => {
         };
         const tree = generateContextTree(state);
         const { getByText } = render(tree);
-        expect(getByText('Current Aircraft: A380')).toHaveTextContent('Current Aircraft:');
+        expect(getByText(/^Current Aircraft:/)).toHaveTextContent('Current Aircraft:');
     });
 
 });
