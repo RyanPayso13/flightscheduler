@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+import {
+  initialState,
+  flightSchedulerReducer
+} from './state/reducers';
+import Context from './state/context';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,27 +25,30 @@ const useStyles = makeStyles(theme => ({
 function App() {
 
   const classes = useStyles();
+  const [state, dispatch] = useReducer(flightSchedulerReducer, initialState);
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <Flight className={classes.icon} />
-          <h2>Flight Scheduler App</h2>
-        </Toolbar>
-      </AppBar>
-      <div className="App">
-        <div className="container">
-          <div className="container__column">
-            <AircraftList />
-          </div>
-          <div>
-            <CurrentAircraft />
+    <Context.Provider value={{ state, dispatch }}>
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="relative">
+          <Toolbar>
+            <Flight className={classes.icon} />
+            <h2>Flight Scheduler App</h2>
+          </Toolbar>
+        </AppBar>
+        <div className="App">
+          <div className="container">
+            <div className="container__column">
+              <AircraftList />
+            </div>
+            <div>
+              <CurrentAircraft />
+            </div>
           </div>
         </div>
-      </div>
-    </React.Fragment>
+      </React.Fragment>
+    </Context.Provider>
   );
 }
 
