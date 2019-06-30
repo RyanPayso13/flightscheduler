@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Flight from '@material-ui/icons/Flight';
 import { makeStyles } from '@material-ui/core/styles';
 import AircraftList from './views/containers/AircraftList/AircraftList';
+import CurrentAircraft from './views/components/CurrentAircraft/CurrentAircraft';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +34,9 @@ function App() {
         <div className="container">
           <div className="container__column">
             <AircraftList />
+          </div>
+          <div>
+            <CurrentAircraft />
           </div>
         </div>
       </div>

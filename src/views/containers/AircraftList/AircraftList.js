@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Aircraft from '../../components/Aircraft/Aircraft';
 
-function AircraftList () {
+const AircraftList = () => {
 
     const API_URL = 'https://infinite-dawn-93085.herokuapp.com/aircrafts';
     const [data, setData] = useState([]);
