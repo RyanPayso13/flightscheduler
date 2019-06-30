@@ -20,6 +20,7 @@ describe('<Aircraft />', () => {
                 <Aircraft {...props} />
             </Context.Provider>
         );
+        
         expect(getByTestId('ident')).toHaveTextContent('GABCD');
         expect(getByTestId('type')).toHaveTextContent('A320');
         expect(getByTestId('base')).toHaveTextContent('EGKK');
@@ -37,9 +38,14 @@ describe('<Aircraft />', () => {
                 <Aircraft {...props} />
             </Context.Provider>
         );      
+
         fireEvent.click(getByTestId('dispatch'));
+
         expect(dispatch).toHaveBeenCalled();  
-        expect(dispatch).toHaveBeenCalledWith({"payload": "GABCD", "type": "SET_CURRENT_AIRCRAFT"});
+        expect(dispatch).toHaveBeenCalledWith({
+            'payload': 'GABCD',
+            'type': 'SET_CURRENT_AIRCRAFT'
+        });
     });
 
 });

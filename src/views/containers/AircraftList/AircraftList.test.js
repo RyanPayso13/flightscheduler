@@ -3,25 +3,26 @@ import {
     render,
     waitForElement
 } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import { FetchMock } from '@react-mock/fetch';
+import { API_URL } from '../../../state/constants';
+import Context from '../../../state/context';
 import AircraftList from './AircraftList';
-import generate from '@babel/generator';
 
 function generateMock (resp = null) {
-    const API_URL = 'https://infinite-dawn-93085.herokuapp.com/aircrafts';
+
+    const dispatch = jest.fn();
 
     return <FetchMock options={{ 
-                matcher: API_URL,
+                matcher: `${API_URL}/aircrafts`,
                 response: resp
                 }}>
-                <AircraftList />
+                <Context.Provider value={{ dispatch }}>
+                    <AircraftList />
+                </Context.Provider>
             </FetchMock>;
 }
 
-xdescribe('<AircraftList />', () => {
-
-    const API_URL = 'https://infinite-dawn-93085.herokuapp.com/aircrafts';
+describe('<AircraftList />', () => {
 
     it('should render self', () => {
         const { getByTestId } = render(<AircraftList />);

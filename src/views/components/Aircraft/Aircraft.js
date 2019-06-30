@@ -9,9 +9,9 @@ const Aircraft = ({ ident = '', type = '', base = '' }) => {
 
     return (
         <li data-testid="dispatch" onClick={() => dispatch(setCurrentAircraft(ident))}>
-            <p data-testid="ident">{ident}</p>
-            <p data-testid="type">{type}</p>
-            <p data-testid="base">{base}</p>
+            <p data-testid="ident">{ ident }</p>
+            <p data-testid="type">{ type }</p>
+            <p data-testid="base">{ base }</p>
         </li>
     );
 };
