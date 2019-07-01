@@ -5,7 +5,7 @@ export const initialState = {
     scheduledFlights: []
 };
 
-export const flightSchedulerReducer = (state = initialState, action) => {
+export const flightSchedulerReducer = (state = initialState, action = '') => {
     switch(action.type) {
       case ACTION_TYPES.SET_CURRENT_AIRCRAFT:
         return {
@@ -18,6 +18,6 @@ export const flightSchedulerReducer = (state = initialState, action) => {
           scheduledFlights: [...state.scheduledFlights, {...action.payload}]
         };
       default:
-        throw new Error(`Unhandled action type: ${action.type}`);
+        return {...state}
     }
 }
