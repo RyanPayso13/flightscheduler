@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { setCurrentAircraft } from '../../../state/actions';
 import Context from '../../../state/context';
 
-const Aircraft = ({ ident = '', type = '', base = '' }) => {
+const Aircraft = ({ 
+    ident = '', 
+    type = '', 
+    base = '' 
+}) => {
 
     const { dispatch } = useContext(Context);
 

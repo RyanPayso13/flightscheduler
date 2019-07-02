@@ -3,6 +3,7 @@ import {
     render,
     fireEvent
 } from '@testing-library/react';
+import * as ACTION_TYPES from '../../../state/constants';
 import Context from '../../../state/context';
 import Aircraft from './Aircraft';
 
@@ -20,7 +21,7 @@ describe('<Aircraft />', () => {
                 <Aircraft {...props} />
             </Context.Provider>
         );
-        
+
         expect(getByTestId('ident')).toHaveTextContent('GABCD');
         expect(getByTestId('type')).toHaveTextContent('A320');
         expect(getByTestId('base')).toHaveTextContent('EGKK');
@@ -44,7 +45,7 @@ describe('<Aircraft />', () => {
         expect(dispatch).toHaveBeenCalled();  
         expect(dispatch).toHaveBeenCalledWith({
             'payload': 'GABCD',
-            'type': 'SET_CURRENT_AIRCRAFT'
+            'type': ACTION_TYPES.SET_CURRENT_AIRCRAFT
         });
     });
 

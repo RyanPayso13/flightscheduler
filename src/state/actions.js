@@ -7,7 +7,7 @@ export function setCurrentAircraft(ident = '') {
     }
 }
 
-export function addFlightToSchedue(flight = {}) {
+export function addFlightToSchedule(flight = {}) {
     return {
         type: ACTION_TYPES.ADD_FLIGHT_TO_SCHEDULE,
         payload: flight

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Context from '../../../state/context';
 import { API_URL } from '../../../state/constants';
+import { addFlightToSchedule } from '../../../state/actions';
+import Flight from '../../components/Flight/Flight';
 
 const FlightList = () => {
 
-    const { state } = useContext(Context);
+    const { state, dispatch } = useContext(Context);
     const [data, setData] = useState([]);
     const [hasError, setError] = useState(false);
     const [isLoading, setLoading] = useState(false);
@@ -20,7 +22,13 @@ const FlightList = () => {
             setError(true);
         }
         setLoading(false);
-    }  
+    };  
+    const handleOnClick = (flight = null) => {
+        const flights = [...data];
+        const payload = {...flight};
+        dispatch(addFlightToSchedule(payload));
+        setData(flights.filter(el => el.id !== flight.id && el.origin === flight.destination && el.departuretime >= (flight.arrivaltime + (40 * 60))));
+    };
 
     useEffect(() => {
         if (state.currentAircraft !== '') {
@@ -34,10 +42,11 @@ const FlightList = () => {
             {!isLoading && !hasError && 
                 <ul data-testid="flight-list">
                     {data.length > 0 && data.map((el, index) => (
-                        // <Flight key={index} {...el} />
-                        <li>{index}</li>
+                        <li key={index} onClick={() => handleOnClick(el)}>
+                            <Flight {...el} />
+                        </li>
                     ))}
-                    {data.length === 0 && <li data-testid="aircraft-msg">There are no flights to display</li>}
+                    {data.length === 0 && <li data-testid="flight-list-msg">There are no flights to schedule for the selected aircraft</li>}
                 </ul>
             }
             {hasError && <div data-testid="error">There has been an error</div>}

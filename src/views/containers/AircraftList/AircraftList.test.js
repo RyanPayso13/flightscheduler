@@ -44,7 +44,7 @@ describe('<AircraftList />', () => {
     });
 
     it('should render one aircraft', async () => {
-        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}]};
+        let data = {"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}]};
         const { getByTestId } = render(generateMock(data));
         const listEl = await waitForElement(() => getByTestId('aircraft-list-container'));
         expect(listEl).toBeInTheDocument();
@@ -52,7 +52,7 @@ describe('<AircraftList />', () => {
     });
 
     it('should render multiple aircraft', async () => {
-        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}, {"ident":"FOOBAR","type":"A320","economySeats":99,"base":"LOND"}]};
+        let data = {"data":[{"ident":"GABCD","type":"A320","economySeats":186,"base":"EGKK"}, {"ident":"FOOBAR","type":"A320","economySeats":99,"base":"LOND"}]};
         const { getByTestId } = render(generateMock(data));
         const listEl = await waitForElement(() => getByTestId('aircraft-list-container'));
         expect(listEl).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('<AircraftList />', () => {
     });
 
     it('should render no aircraft message', async () => {
-        let data = {"pagination":{"offset":0,"limit":25,"total":1},"data":[]};
+        let data = {"data":[]};
         const { getByTestId } = render(generateMock(data));
         const aicraftMsgEl = await waitForElement(() => getByTestId('aircraft-msg'));
         expect(aicraftMsgEl).toBeInTheDocument();

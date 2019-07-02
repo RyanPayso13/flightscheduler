@@ -26,7 +26,7 @@ describe('Actions', () => {
             type: ACTION_TYPES.ADD_FLIGHT_TO_SCHEDULE,
             payload
         };
-        expect(actions.addFlightToSchedue(payload)).toEqual(expectedAction);
+        expect(actions.addFlightToSchedule(payload)).toEqual(expectedAction);
     });
 
 });
