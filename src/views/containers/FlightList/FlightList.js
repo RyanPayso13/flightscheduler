@@ -27,7 +27,14 @@ const FlightList = () => {
         const flights = [...data];
         const payload = {...flight};
         dispatch(addFlightToSchedule(payload));
-        setData(flights.filter(el => el.id !== flight.id && el.origin === flight.destination && el.departuretime >= (flight.arrivaltime + (40 * 60))));
+        /**
+         * Flights cannot teleport location
+         * Flights must be at least 40 minutes in the future
+         */
+        setData(flights.filter(el => el.id !== flight.id 
+                                && el.origin === flight.destination 
+                                && el.departuretime >= (flight.arrivaltime + (40 * 60)))
+                );
     };
 
     useEffect(() => {
