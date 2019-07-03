@@ -25,11 +25,19 @@ describe('<ScheduledflightList />', () => {
     });
 
     it('should render a single flight', () => {
-
+        const state = {
+            scheduledFlights: [{"id":"AS1001","departuretime":21600,"arrivaltime":26100,"readable_departure":"06:00","readable_arrival":"07:15","origin":"LFSB","destination":"LFMN"}]
+        };
+        const { getByTestId } = render(generateContext(state));
+        expect(document.querySelectorAll('li').length).toEqual(1);
     });
 
-    it('should render multiple flights', () => {
-
+    it('should render flights', () => {
+        const state = {
+            scheduledFlights: [{"id":"AS1001","departuretime":21600,"arrivaltime":26100,"readable_departure":"06:00","readable_arrival":"07:15","origin":"LFSB","destination":"LFMN"}, {"id":"AS1002","departuretime":27900,"arrivaltime":32100,"readable_departure":"07:45","readable_arrival":"08:55","origin":"LFMN","destination":"LFSB"}]
+        };
+        const { getByTestId } = render(generateContext(state));
+        expect(document.querySelectorAll('li').length).toEqual(2);
     });
 
 });
