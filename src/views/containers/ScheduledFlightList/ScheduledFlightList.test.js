@@ -13,7 +13,7 @@ function generateContext (obj = {}) {
 
 }
 
-describe('<ScheduledflightList />', () => {
+describe('<ScheduledFlightList />', () => {
 
     it('should render no flights message', () => {
         const state = {

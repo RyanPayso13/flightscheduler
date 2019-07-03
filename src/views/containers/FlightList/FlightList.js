@@ -49,7 +49,7 @@ const FlightList = () => {
             {!isLoading && !hasError && 
                 <ul data-testid="flight-list">
                     {data.length > 0 && data.map((el, index) => (
-                        <li key={index} onClick={() => handleOnClick(el)}>
+                        <li data-testid="flight-el" key={index} onClick={() => handleOnClick(el)}>
                             <Flight {...el} />
                         </li>
                     ))}
