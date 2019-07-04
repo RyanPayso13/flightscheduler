@@ -20,7 +20,7 @@ const ScheduledFlightList = () => {
                         <Flight {...el} />
                     </li>
                 ))}
-                {data.length === 0 && <li data-testid="schedule-list-msg">There are no flights available for schedule</li>}
+                {data.length === 0 && <li data-testid="schedule-list-msg">There are no flights scheduled</li>}
             </ul>
         </div>
     );
