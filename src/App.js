@@ -4,44 +4,38 @@ import {
   flightSchedulerReducer
 } from './state/reducers';
 import Context from './state/context';
-import Flight from '@material-ui/icons/Flight';
-import { makeStyles } from '@material-ui/core/styles';
 import AircraftList from './views/containers/AircraftList/AircraftList';
 import CurrentAircraft from './views/components/CurrentAircraft/CurrentAircraft';
 import FlightList from './views/containers/FlightList/FlightList';
 import ScheduledFlightList from './views/containers/ScheduledFlightList/ScheduledFlightList';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    color: theme.palette.text.primary,
-  },
-  icon: {
-    margin: theme.spacing(1),
-    fontSize: 32,
-  },
-}));
-
 function App() {
 
-  const classes = useStyles();
   const [state, dispatch] = useReducer(flightSchedulerReducer, initialState);
 
   return (
     <Context.Provider value={{ state, dispatch }}>
       <React.Fragment>
-            <h2><Flight className={classes.icon} /> Flight Scheduler App</h2>
-        <div className="App">
-          <div className="container">
-            <div className="container__column">
-              <AircraftList />
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex bg-gray-200">
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
+              Available Aircraft
             </div>
-            <div>
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
               <CurrentAircraft />
             </div>
-            <div>
-              <ScheduledFlightList />
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
+              Available Flights
             </div>
-            <div>
+          </div>
+          <div className="flex max-h-screen bg-gray-200">
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
+            <AircraftList />
+            </div>
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
+            <ScheduledFlightList />
+            </div>
+            <div className="flex-1 text-gray-700 text-center bg-gray-400 px-4 py-2 m-2">
               <FlightList />
             </div>
           </div>

@@ -10,11 +10,11 @@ const FlightList = () => {
     const [data, setData] = useState([]);
     const [hasError, setError] = useState(false);
     const [isLoading, setLoading] = useState(false);
-    const fetchFlights = async (ident = '') => {
+    const fetchFlights = async (id = '') => {
         setLoading(true);
         setError(false);
         try {
-            const result = await fetch(`${API_URL}/flights`);
+            const result = await fetch(`${API_URL}/flights/${id}`);
             result
                 .json()
                 .then(data => setData(data.data));
@@ -44,7 +44,7 @@ const FlightList = () => {
     }, [state.currentAircraft]);
 
     return (
-        <div data-testid="flight-list-container">
+        <div className="max-h-screen overflow-y-auto" data-testid="flight-list-container">
             {isLoading && <div data-testid="loading">Loading...</div>}
             {!isLoading && !hasError && 
                 <ul data-testid="flight-list">

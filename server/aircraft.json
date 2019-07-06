@@ -1,0 +1,12 @@
+[{
+    "ident":"GABCD",
+    "type":"A320",
+    "economySeats":186,
+    "base":"EGKK"
+},
+{
+    "ident":"FOBAR",
+    "type":"A380",
+    "economySeats":2766,
+    "base":"LFSD"
+}]

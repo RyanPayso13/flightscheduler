@@ -11,11 +11,12 @@ const AircraftList = () => {
         setLoading(true);
         setError(false);
         try {
-            const result = await fetch(`${API_URL}/aircrafts`);
+            const result = await fetch(`${API_URL}/aircraft`);
             result
                 .json()
                 .then(data => setData(data.data));
         } catch (error) {
+            console.log(error);
             setError(true);
         }
         setLoading(false);
