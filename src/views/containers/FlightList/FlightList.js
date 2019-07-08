@@ -3,6 +3,8 @@ import Context from '../../../state/context';
 import { API_URL } from '../../../state/constants';
 import { addFlightToSchedule } from '../../../state/actions';
 import Flight from '../../components/Flight/Flight';
+import { ScaleLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 
 const FlightList = () => {
 
@@ -36,6 +38,9 @@ const FlightList = () => {
                                 && el.departuretime >= (flight.arrivaltime + (40 * 60)))
                 );
     };
+    const override = css`
+        margin-top: 1rem;
+    `;
 
     useEffect(() => {
         if (state.currentAircraft !== '') {
@@ -44,19 +49,33 @@ const FlightList = () => {
     }, [state.currentAircraft]);
 
     return (
-        <div className="max-h-screen overflow-y-auto" data-testid="flight-list-container">
-            {isLoading && <div data-testid="loading">Loading...</div>}
+        <div 
+            data-testid="flight-list-container"
+            className="overflow-y-auto max-h-full">
+            {isLoading && <ScaleLoader
+                            css={override}
+                            sizeUnit={"px"}
+                            size={100}
+                            color={'#616161'}
+                            loading={isLoading} />}
             {!isLoading && !hasError && 
                 <ul data-testid="flight-list">
                     {data.length > 0 && data.map((el, index) => (
-                        <li data-testid="flight-el" key={index} onClick={() => handleOnClick(el)}>
+                        <li data-testid="flight-el" 
+                            key={index} 
+                            onClick={() => handleOnClick(el)}>
                             <Flight {...el} />
                         </li>
                     ))}
-                    {data.length === 0 && <li data-testid="flight-list-msg">There are no flights to schedule for the selected aircraft</li>}
+                    {data.length === 0 && <li data-testid="flight-list-msg" className="bg-blue-100 border border-blue-200 text-blue-700 mt-4 px-4 py-3 rounded relative" role="alert">No data</li>}
                 </ul>
             }
-            {hasError && <div data-testid="error">There has been an error</div>}
+            {hasError && <div 
+                            data-testid="error"
+                            className="bg-red-100 border border-red-200 text-red-700 mt-4 px-4 py-3 rounded relative" role="alert">
+                                There has been an error
+                        </div>
+            }
         </div>
     );
 

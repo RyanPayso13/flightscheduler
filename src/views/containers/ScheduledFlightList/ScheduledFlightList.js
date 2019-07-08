@@ -20,7 +20,11 @@ const ScheduledFlightList = () => {
                         <Flight {...el} />
                     </li>
                 ))}
-                {data.length === 0 && <li data-testid="schedule-list-msg">There are no flights scheduled</li>}
+                {data.length === 0 && <li className="bg-blue-100 border border-blue-200 text-blue-700 mt-4 px-4 py-3 rounded relative" 
+                                            role="alert"
+                                            data-testid="schedule-list-msg">
+                                                No data
+                                    </li>}
             </ul>
         </div>
     );

@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.14",
     "@material-ui/icons": "^4.2.1",
     "cors": "^2.8.5",
+    "firebase": "^6.2.4",
     "http-proxy-middleware": "^0.19.1",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-icons": "^3.7.0",
     "react-scripts": "3.0.1",
+    "react-spinners": "^0.5.8",
     "tailwindcss": "^1.0.4"
   },
   "scripts": {
@@ -23,6 +27,7 @@
     "server": "node-env-run server --exec nodemon | pino-colada",
     "dev": "run-p server start"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },

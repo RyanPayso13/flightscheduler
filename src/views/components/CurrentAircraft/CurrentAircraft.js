@@ -6,9 +6,9 @@ const CurrentAircraft = () => {
     const { state } = useContext(Context);
 
     return (
-        <React.Fragment>
-           Current Aircraft: { state.currentAircraft }
-        </React.Fragment>
+        <h2 className="border-b border-grey-light pb-3">
+           Schedule for { state.currentAircraft }
+        </h2>
     );
 };
 

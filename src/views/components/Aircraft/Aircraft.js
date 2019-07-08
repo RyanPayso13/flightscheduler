@@ -12,7 +12,9 @@ const Aircraft = ({
     const { dispatch } = useContext(Context);
 
     return (
-        <li data-testid="dispatch" onClick={() => dispatch(setCurrentAircraft(ident))}>
+        <li className="border border-grey-light p-2 mt-4 rounded"
+            data-testid="dispatch" 
+            onClick={() => dispatch(setCurrentAircraft(ident))}>
             <p data-testid="ident">{ ident }</p>
             <p data-testid="type">{ type }</p>
             <p data-testid="base">{ base }</p>
