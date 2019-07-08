@@ -43,7 +43,7 @@ const AircraftList = () => {
                     {data.length > 0 && data.map((el, index) => (
                         <Aircraft key={index} {...el} />
                     ))}
-                    {data.length === 0 && <li data-testid="aircraft-msg">No data</li>}
+                    {data.length === 0 && <li data-testid="aircraft-msg" className="bg-blue-100 border border-blue-200 text-blue-700 mt-4 px-4 py-3 rounded relative" role="alert">No data</li>}
                 </ul>
             }
             {hasError && <div 

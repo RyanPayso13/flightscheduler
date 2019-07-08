@@ -8,4 +8,4 @@ let AircraftSchema = new Schema({
   base: String,
 });
 
-module.exports = mongoose.model('AircraftModel', AircraftSchema);
+module.exports = mongoose.model('aircraft', AircraftSchema);
