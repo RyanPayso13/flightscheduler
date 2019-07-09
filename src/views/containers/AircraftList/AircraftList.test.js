@@ -11,12 +11,15 @@ import AircraftList from './AircraftList';
 function generateMock (resp = null) {
 
     const dispatch = jest.fn();
+    const state = {
+        currentAircraft: ''
+    }
 
     return <FetchMock options={{ 
                 matcher: `${API_URL}/aircraft`,
                 response: resp
                 }}>
-                <Context.Provider value={{ dispatch }}>
+                <Context.Provider value={{ state, dispatch }}>
                     <AircraftList />
                 </Context.Provider>
             </FetchMock>;

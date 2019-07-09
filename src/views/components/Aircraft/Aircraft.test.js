@@ -7,38 +7,34 @@ import * as ACTION_TYPES from '../../../state/constants';
 import Context from '../../../state/context';
 import Aircraft from './Aircraft';
 
+function generateContext (state = { currentAircraft: '' }, dispatch = jest.fn()) {
+
+    const props = {
+        ident: 'GABCD',
+        type: 'A320',
+        base: 'EGKK'
+    };
+
+    return <Context.Provider value={{ state, dispatch }}>
+                <Aircraft {...props} />
+            </Context.Provider>;
+}
+
 describe('<Aircraft />', () => {
 
     it('should render self', () => {
-        const props = {
-            ident: 'GABCD',
-            type: 'A320',
-            base: 'EGKK'
-        };
-        const dispatch = jest.fn();
-        const { getByTestId } = render(
-            <Context.Provider value={{ dispatch }}>
-                <Aircraft {...props} />
-            </Context.Provider>
-        );
-
+        const { getByTestId } = render(generateContext());
         expect(getByTestId('ident')).toHaveTextContent('GABCD');
         expect(getByTestId('type')).toHaveTextContent('A320');
         expect(getByTestId('base')).toHaveTextContent('EGKK');
       });
 
-    it('should handle click', () => {
-        const props = {
-            ident: 'GABCD',
-            type: 'A320',
-            base: 'EGKK'
+    it('should dispatch the clicked aircraft', () => {
+        const state = {
+            currentAircraft: 'GABCD'
         };
         const dispatch = jest.fn();
-        const { getByTestId } = render(
-            <Context.Provider value={{ dispatch }}>
-                <Aircraft {...props} />
-            </Context.Provider>
-        );      
+        const { getByTestId } = render(generateContext(state, dispatch));
 
         fireEvent.click(getByTestId('dispatch'));
 
@@ -47,6 +43,18 @@ describe('<Aircraft />', () => {
             'payload': 'GABCD',
             'type': ACTION_TYPES.SET_CURRENT_AIRCRAFT
         });
+    });
+
+    it('should highlight the current aircraft', () => {
+        const state = {
+            currentAircraft: 'GABCD'
+        };
+        const dispatch = jest.fn();
+        const { getByTestId } = render(generateContext(state, dispatch));
+
+        fireEvent.click(getByTestId('dispatch'));
+
+        expect(getByTestId('dispatch')).toHaveClass('bg-indigo-200');
     });
 
 });
