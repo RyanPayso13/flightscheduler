@@ -54,7 +54,7 @@ describe('<Aircraft />', () => {
 
         fireEvent.click(getByTestId('dispatch'));
 
-        expect(getByTestId('dispatch')).toHaveClass('bg-indigo-200');
+        expect(getByTestId('dispatch')).toHaveClass('bg-green-200');
     });
 
     it('should not highlight the aircraft', () => {
@@ -66,7 +66,7 @@ describe('<Aircraft />', () => {
 
         fireEvent.click(getByTestId('dispatch'));
 
-        expect(getByTestId('dispatch')).not.toHaveClass('bg-indigo-200');
+        expect(getByTestId('dispatch')).not.toHaveClass('bg-green-200');
     });    
 
 });
