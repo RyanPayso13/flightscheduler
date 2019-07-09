@@ -29,7 +29,7 @@ describe('<Aircraft />', () => {
         expect(getByTestId('base')).toHaveTextContent('EGKK');
       });
 
-    it('should dispatch the clicked aircraft', () => {
+    it('should dispatch the aircraft', () => {
         const state = {
             currentAircraft: 'GABCD'
         };
@@ -45,7 +45,7 @@ describe('<Aircraft />', () => {
         });
     });
 
-    it('should highlight the current aircraft', () => {
+    it('should highlight the aircraft', () => {
         const state = {
             currentAircraft: 'GABCD'
         };
@@ -56,5 +56,17 @@ describe('<Aircraft />', () => {
 
         expect(getByTestId('dispatch')).toHaveClass('bg-indigo-200');
     });
+
+    it('should not highlight the aircraft', () => {
+        const state = {
+            currentAircraft: ''
+        };
+        const dispatch = jest.fn();
+        const { getByTestId } = render(generateContext(state, dispatch));
+
+        fireEvent.click(getByTestId('dispatch'));
+
+        expect(getByTestId('dispatch')).not.toHaveClass('bg-indigo-200');
+    });    
 
 });
