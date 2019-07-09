@@ -29,4 +29,13 @@ describe('Actions', () => {
         expect(actions.addFlightToSchedule(payload)).toEqual(expectedAction);
     });
 
+    it('should reset the schedule', () => {
+        const payload = true;
+        const expectedAction = {
+            type: ACTION_TYPES.RESET_SCHEDULE,
+            payload
+        };
+        expect(actions.resetSchedule()).toEqual(expectedAction);
+    });
+
 });

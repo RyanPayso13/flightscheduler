@@ -17,6 +17,12 @@ export const flightSchedulerReducer = (state = initialState, action = '') => {
           ...state,
           scheduledFlights: [...state.scheduledFlights, {...action.payload}]
         };
+      case ACTION_TYPES.RESET_SCHEDULE:
+          return {
+            ...state,
+            currentAircraft: '',
+            scheduledFlights: []
+          }
       default:
         return {...state}
     }

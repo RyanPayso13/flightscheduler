@@ -13,3 +13,10 @@ export function addFlightToSchedule(flight = {}) {
         payload: flight
     }
 }
+
+export function resetSchedule() {
+    return {
+        type: ACTION_TYPES.RESET_SCHEDULE,
+        payload: true
+    }
+}

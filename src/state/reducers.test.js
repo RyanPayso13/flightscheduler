@@ -1,6 +1,5 @@
 import { flightSchedulerReducer } from './reducers';
 import * as ACTION_TYPES from './constants';
-import * as actions from './actions';
 
 describe('Reducers', () => {
 
@@ -35,7 +34,7 @@ describe('Reducers', () => {
 
     describe(`${ACTION_TYPES.ADD_FLIGHT_TO_SCHEDULE}`, () => {
 
-        const API_FLIGHTS_LIST = [
+        const flights = [
             {
                 "id":"AS1001",
                 "departuretime":21600,
@@ -55,7 +54,7 @@ describe('Reducers', () => {
                 "destination":"LFSB"
             }
         ];
-        const PAYLOAD = {
+        const payload = {
             "id":"AS9999",
             "departuretime":33300,
             "arrivaltime":42900,
@@ -70,21 +69,67 @@ describe('Reducers', () => {
                 scheduledFlights: []
             }, {
                 type: ACTION_TYPES.ADD_FLIGHT_TO_SCHEDULE,
-                payload: PAYLOAD
+                payload: payload
             })).toEqual({
-                scheduledFlights: [{...PAYLOAD}]
+                scheduledFlights: [{...payload}]
             });
         });     
 
         it('should add a flight to an existing schedule', () => {
             expect(flightSchedulerReducer({
-                scheduledFlights: [...API_FLIGHTS_LIST]
+                scheduledFlights: [...flights]
             }, {
                 type: ACTION_TYPES.ADD_FLIGHT_TO_SCHEDULE,
-                payload: PAYLOAD
+                payload: payload
             })).toEqual({
-                scheduledFlights: [...API_FLIGHTS_LIST, PAYLOAD]
+                scheduledFlights: [...flights, payload]
             });
+        });
+
+    });
+
+    describe(`${ACTION_TYPES.RESET_SCHEDULE}`, () => {
+
+        const flights = [
+            {
+                "id":"AS1001",
+                "departuretime":21600,
+                "arrivaltime":26100,
+                "readable_departure":"06:00",
+                "readable_arrival":"07:15",
+                "origin":"LFSB",
+                "destination":"LFMN"
+            },
+            {
+                "id":"AS1002",
+                "departuretime":27900,
+                "arrivaltime":32100,
+                "readable_departure":"07:45",
+                "readable_arrival":"08:55",
+                "origin":"LFMN",
+                "destination":"LFSB"
+            }
+        ];
+        const currentAircraft = 'GABCD';
+
+        it('should reset the schedule', () => {
+
+            expect(flightSchedulerReducer({
+                currentAircraft,
+                scheduledFlights: [...flights]
+            })).toEqual({
+                currentAircraft: 'GABCD',
+                scheduledFlights: [...flights]
+            });
+
+            expect(flightSchedulerReducer(null, {
+                type: ACTION_TYPES.RESET_SCHEDULE,
+                payload: true
+            })).toEqual({
+                currentAircraft: '',
+                scheduledFlights: []
+            });
+
         });
 
     });
