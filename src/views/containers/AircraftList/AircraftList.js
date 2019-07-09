@@ -32,12 +32,13 @@ const AircraftList = () => {
 
     return (
         <div data-testid="aircraft-list-container">
-            {isLoading && <span data-testid="loader"><ScaleLoader
-                            css={override}
-                            sizeUnit={"px"}
-                            size={100}
-                            color={'#616161'}
-                            loading={isLoading} />
+            {isLoading && <span data-testid="loader">
+                            <ScaleLoader
+                                css={override}
+                                sizeUnit={"px"}
+                                size={100}
+                                color={'#616161'}
+                                loading={isLoading} />
                             </span>}
             {!isLoading && !hasError && 
                 <ul data-testid="aircraft-list">

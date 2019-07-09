@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { setCurrentAircraft } from '../../../state/actions';
 import Context from '../../../state/context';
@@ -9,10 +9,16 @@ const Aircraft = ({
     base = '' 
 }) => {
 
-    const { dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(Context);
+    const [highlightClass, setHighlightClass] = useState('');
+    let classes = `${ highlightClass } border border-grey-light p-2 mt-4 rounded`;
+
+    useEffect(() => {
+        return setHighlightClass(state.currentAircraft === ident ? 'bg-indigo-200' : '');
+    }, [state.currentAircraft, ident]);
 
     return (
-        <li className="border border-grey-light p-2 mt-4 rounded"
+        <li className={ classes }
             data-testid="dispatch" 
             onClick={() => dispatch(setCurrentAircraft(ident))}>
             <p data-testid="ident">{ ident }</p>
