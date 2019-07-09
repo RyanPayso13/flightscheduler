@@ -21,7 +21,7 @@ describe('<ScheduledFlightList />', () => {
         };
         const { getByTestId } = render(generateContext(state));
         expect(getByTestId('schedule')).toBeInTheDocument();
-        expect(getByTestId('schedule-list-msg')).toHaveTextContent('There are no flights scheduled');
+        expect(getByTestId('schedule-list-msg')).toHaveTextContent('No data');
     });
 
     it('should render a single flight', () => {

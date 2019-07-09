@@ -13,7 +13,7 @@ function generateMock (resp = null) {
     const dispatch = jest.fn();
 
     return <FetchMock options={{ 
-                matcher: `${API_URL}/aircrafts`,
+                matcher: `${API_URL}/aircraft`,
                 response: resp
                 }}>
                 <Context.Provider value={{ dispatch }}>
@@ -31,9 +31,8 @@ describe('<AircraftList />', () => {
 
     it('should render loading state', () => {
         const { getByTestId } = render(<AircraftList />);
-        const loadingEl = getByTestId('loading');
+        const loadingEl = getByTestId('loader');
         expect(loadingEl).toBeInTheDocument();
-        expect(loadingEl).toHaveTextContent('Loading...');
     });
 
     it('should render error state', async () => {
@@ -64,7 +63,7 @@ describe('<AircraftList />', () => {
         const { getByTestId } = render(generateMock(data));
         const aicraftMsgEl = await waitForElement(() => getByTestId('aircraft-msg'));
         expect(aicraftMsgEl).toBeInTheDocument();
-        expect(aicraftMsgEl).toHaveTextContent('There are no aircraft to display');
+        expect(aicraftMsgEl).toHaveTextContent('No data');
     });
 
 });

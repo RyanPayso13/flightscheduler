@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
 const app = express();
-const uri = "mongodb+srv://payso:Q16AixyMA1r0vv7I@flightschedulercluster-xtxqg.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://payso:mOCv8wsBiK5VUoEn@flightschedulercluster-xtxqg.mongodb.net/test?retryWrites=true&w=majority";
 const mongoose = require('mongoose');
 const AircraftModel = require('./models/aircraft');
 const FlightModel = require('./models/flight');

@@ -10,12 +10,12 @@ import * as ACTION_TYPES from '../../../state/constants';
 import Context from '../../../state/context';
 import FlightList from './FlightList';
 
-function generateMock (obj = {}, resp = null, dispatch = jest.fn()) {
+function generateMock (obj = {}, resp = null, dispatch = jest.fn(), flightId = 'A380') {
     
     const state = {...obj};
 
     return <FetchMock options={{
-                matcher: `${API_URL}/flights`,
+                matcher: `${API_URL}/flights/${flightId}`,
                 response: resp
             }}>
                 <Context.Provider value={{ state, dispatch }}>
@@ -43,7 +43,7 @@ describe('<FlightList />', () => {
         const { getByTestId } = render(generateMock(state, {"data":[]}));
         const flightListMsg = await waitForElement(() => getByTestId('flight-list-msg'));
         expect(flightListMsg).toBeInTheDocument();
-        expect(flightListMsg).toHaveTextContent('There are no flights to schedule for the selected aircraft');
+        expect(flightListMsg).toHaveTextContent('No data');
     });
 
     it('should render error state', async () => {
@@ -63,7 +63,7 @@ describe('<FlightList />', () => {
         const { getByTestId } = render(generateMock(state, {"data":[]}));
         const flightListMsg = await waitForElement(() => getByTestId('flight-list-msg'));
         expect(flightListMsg).toBeInTheDocument();
-        expect(flightListMsg).toHaveTextContent('There are no flights to schedule for the selected aircraft');
+        expect(flightListMsg).toHaveTextContent('No data');
     });
 
     it('should render a single flight', async () => {

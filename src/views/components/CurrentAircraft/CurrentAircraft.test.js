@@ -21,7 +21,7 @@ describe('<CurrentAircraft />', () => {
         };
         const tree = generateContextTree(state);
         const { getByText } = render(tree);
-        expect(getByText(/^Current Aircraft:/)).toHaveTextContent('Current Aircraft:');
+        expect(getByText(/^Schedule for/)).toHaveTextContent('Schedule for');
     });
 
     it('should render an aircraft id', () => {
@@ -30,7 +30,7 @@ describe('<CurrentAircraft />', () => {
         };
         const tree = generateContextTree(state);
         const { getByText } = render(tree);
-        expect(getByText(/^Current Aircraft:/)).toHaveTextContent('Current Aircraft:');
+        expect(getByText(/^Schedule for/)).toHaveTextContent('Schedule for A380');
     });
 
 });
