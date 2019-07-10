@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { setCurrentAircraft } from '../../../state/actions';
+import { 
+    setCurrentAircraft, 
+    resetSchedule 
+} from '../../../state/actions';
 import Context from '../../../state/context';
 
 const Aircraft = ({ 
@@ -11,6 +14,10 @@ const Aircraft = ({
 
     const { state, dispatch } = useContext(Context);
     const [highlightClass, setHighlightClass] = useState('');
+    const handleClick = ident => {
+        dispatch(resetSchedule());
+        dispatch(setCurrentAircraft(ident));
+    };
     let classes = `${ highlightClass } border border-grey-light p-2 mt-4 rounded`;
 
     useEffect(() => {
@@ -20,7 +27,7 @@ const Aircraft = ({
     return (
         <li className={ classes }
             data-testid="dispatch" 
-            onClick={() => dispatch(setCurrentAircraft(ident))}>
+            onClick={() => handleClick(ident)}>
             <p data-testid="ident">{ ident }</p>
             <p data-testid="type">{ type }</p>
             <p data-testid="base">{ base }</p>

@@ -27,9 +27,9 @@ describe('<Aircraft />', () => {
         expect(getByTestId('ident')).toHaveTextContent('GABCD');
         expect(getByTestId('type')).toHaveTextContent('A320');
         expect(getByTestId('base')).toHaveTextContent('EGKK');
-      });
+    });
 
-    it('should dispatch the aircraft', () => {
+    it(`should dispatch both actions: ${ACTION_TYPES.SET_CURRENT_AIRCRAFT}, ${ACTION_TYPES.RESET_SCHEDULE}`, () => {
         const state = {
             currentAircraft: 'GABCD'
         };
@@ -39,10 +39,9 @@ describe('<Aircraft />', () => {
         fireEvent.click(getByTestId('dispatch'));
 
         expect(dispatch).toHaveBeenCalled();  
-        expect(dispatch).toHaveBeenCalledWith({
-            'payload': 'GABCD',
-            'type': ACTION_TYPES.SET_CURRENT_AIRCRAFT
-        });
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch.mock.calls[0][0]).toEqual({"payload": true, "type": ACTION_TYPES.RESET_SCHEDULE});
+        expect(dispatch.mock.calls[1][0]).toEqual({"payload": state.currentAircraft, "type": ACTION_TYPES.SET_CURRENT_AIRCRAFT});
     });
 
     it('should highlight the aircraft', () => {
@@ -57,7 +56,7 @@ describe('<Aircraft />', () => {
         expect(getByTestId('dispatch')).toHaveClass('bg-green-200');
     });
 
-    it('should not highlight the aircraft', () => {
+    it('should unhighlight the aircraft', () => {
         const state = {
             currentAircraft: ''
         };
