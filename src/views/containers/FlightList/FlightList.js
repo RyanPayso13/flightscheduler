@@ -35,7 +35,7 @@ const FlightList = () => {
          */
         setData(flights.filter(el => el.id !== flight.id 
                                 && el.origin === flight.destination 
-                                && el.departuretime >= (flight.arrivaltime + (40 * 60)))
+                                && el.departure_time >= (flight.arrival_time + (40 * 60)))
                 );
     };
     const override = css`
@@ -43,10 +43,11 @@ const FlightList = () => {
     `;
 
     useEffect(() => {
-        if (state.currentAircraft !== '') {
+        if (state.currentAircraft !== '' && 
+            state.scheduledFlights.length === 0) {
             fetchFlights(state.currentAircraft);
         }
-    }, [state.currentAircraft]);
+    }, [ state.currentAircraft, state.scheduledFlights ]);
 
     return (
         <div 
