@@ -115,10 +115,8 @@ describe('Reducers', () => {
         it('should reset the schedule', () => {
 
             expect(flightSchedulerReducer({
-                currentAircraft,
                 scheduledFlights: [...flights]
             })).toEqual({
-                currentAircraft: 'GABCD',
                 scheduledFlights: [...flights]
             });
 
@@ -126,7 +124,6 @@ describe('Reducers', () => {
                 type: ACTION_TYPES.RESET_SCHEDULE,
                 payload: true
             })).toEqual({
-                currentAircraft: '',
                 scheduledFlights: []
             });
 
