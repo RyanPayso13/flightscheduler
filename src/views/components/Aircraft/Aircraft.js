@@ -6,11 +6,7 @@ import {
 } from '../../../state/actions';
 import Context from '../../../state/context';
 
-const Aircraft = ({ 
-    ident = '', 
-    type = '', 
-    base = '' 
-}) => {
+const Aircraft = ({ ident, type, base}) => {
 
     const { state, dispatch } = useContext(Context);
     const [highlightClass, setHighlightClass] = useState('');
