@@ -19,7 +19,7 @@ const ResetBtn = () => {
             data-testid="reset-btn"
             type="button"
             className="self-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded" 
-            onClick={() => handleClick()}
+            onClick={ handleClick }
             disabled={ disabled }>
                 Reset Schedule
         </button>
