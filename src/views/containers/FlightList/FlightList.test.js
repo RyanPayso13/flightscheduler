@@ -35,19 +35,6 @@ describe('<FlightList />', () => {
         expect(getByTestId('flight-list-container')).toBeInTheDocument();
     });
 
-    xit('should render loading state', async () => {
-        // how to test loading only
-        // currentaircraft must be proper string to fire fetch
-        const state = {
-            currentAircraft: '',
-            scheduledFlights: []
-        };
-        const { getByTestId } = render(generateMock(state, {"data":[]}));
-        const flightListMsg = await waitForElement(() => getByTestId('flight-list-msg'));
-        expect(flightListMsg).toBeInTheDocument();
-        expect(flightListMsg).toHaveTextContent('No data');
-    });
-
     it('should render error state', async () => {
         const state = {
             currentAircraft: 'A380',
@@ -113,6 +100,7 @@ describe('<FlightList />', () => {
             scheduledFlights: []
         };
         const { 
+            getByTestId,
             queryByText, 
             getAllByTestId 
         } = render(generateMock(
@@ -141,12 +129,23 @@ describe('<FlightList />', () => {
             ]}
             ));
         const flights = await waitForElement(() => getAllByTestId('flight-el'));
+        
         expect(flights.length).toEqual(2);
+
         fireEvent.click(flights[0]);
+        
         const flightsUpdated = await waitForElement(() => getAllByTestId('flight-el'));
+
         expect(flightsUpdated.length).toEqual(1);
         expect(queryByText(/^Flight: AS1227/)).not.toBeInTheDocument();
         expect(queryByText(/^Flight: AS1228/)).toBeInTheDocument();
+
+        fireEvent.click(flights[0]);
+
+        const flightListMsg = await waitForElement(() => getByTestId('flight-list-msg'));
+
+        expect(flightListMsg).toBeInTheDocument();
+        expect(flightListMsg).toHaveTextContent('No data');
     });
 
 });

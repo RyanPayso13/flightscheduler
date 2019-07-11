@@ -20,9 +20,7 @@ const Aircraft = ({
     };
     let classes = `${ highlightClass } border border-grey-light p-2 mt-4 rounded`;
 
-    useEffect(() => {
-        return setHighlightClass(state.currentAircraft === ident ? 'bg-green-200' : '');
-    }, [state.currentAircraft, ident]);
+    useEffect(() => setHighlightClass(state.currentAircraft === ident ? 'bg-green-200' : ''), [state.currentAircraft, ident]);
 
     return (
         <li className={ classes }
