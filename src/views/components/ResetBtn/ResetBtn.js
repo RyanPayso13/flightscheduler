@@ -7,7 +7,6 @@ const ResetBtn = () => {
     const { state, dispatch } = useContext(Context);
     const [ disabled, setDisabled ] = useState('');
     const handleClick = () => {
-        console.log('dispatch from reset', state.currentAircraft);
         dispatch(resetSchedule());
     };
 
