@@ -29,7 +29,7 @@ describe('<Aircraft />', () => {
         expect(getByTestId('base')).toHaveTextContent('EGKK');
     });
 
-    it(`should dispatch both actions: ${ACTION_TYPES.SET_CURRENT_AIRCRAFT}, ${ACTION_TYPES.RESET_SCHEDULE}`, () => {
+    it(`should dispatch the actions: ${ACTION_TYPES.SET_CURRENT_AIRCRAFT}, ${ACTION_TYPES.RESET_SCHEDULE}`, () => {
         const state = {
             currentAircraft: 'GABCD'
         };

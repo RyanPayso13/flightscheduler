@@ -6,7 +6,7 @@ import Flight from './Flight';
 
 describe('<Flight />', () => {
 
-    it('should render self', () => {
+    it('should render a flight', () => {
         const props = {
             "id":"AS1001",
             "departuretime":21600,
